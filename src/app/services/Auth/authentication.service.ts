@@ -22,7 +22,8 @@ export class AuthenticationService {
   login(email: string, password: string) {
     const credentials = { email, password };
     return this.http.post(this.url + '/auth/login', credentials, { withCredentials: true }).pipe(
-      tap(response => {
+      tap((response: any) => {
+        this.cookieService.set('AUTH', response.cookie.AUTH);
         this.isLoggedIn.next(true);
         this.router.navigate(['/']);
       })
