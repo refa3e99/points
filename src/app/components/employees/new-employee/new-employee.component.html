@@ -1,0 +1,25 @@
+<div>
+    <form [formGroup]="newEmployeeForm" (ngSubmit)="addNewEmployee()" class="row g-3">
+
+        <div class="d-md-flex gap-2 py-3">
+            <div class="col">
+                <label for="inputname" class="form-label">Name</label>
+                <input type="text" class="form-control" id="inputname" formControlName="name"
+                    [ngClass]="{ 'is-invalid': name?.invalid && (name?.dirty || name?.touched || formSubmitted), 'is-valid': name?.valid && (name?.dirty || name?.touched) }"
+                    placeholder="John Doe">
+            </div>
+
+            <div class="col">
+                <label for="inputTitle" class="form-label">Title</label>
+                <input type="text" class="form-control" id="inputTitle" formControlName="title"
+                    [ngClass]="{ 'is-invalid': title?.invalid && (title?.dirty || title?.touched || formSubmitted), 'is-valid': title?.valid && (title?.dirty || title?.touched) }"
+                    placeholder="Manager">
+            </div>
+        </div>
+
+        <div class="col-12">
+            <button type="submit" class="btn btn-primary">Add Employee</button>
+        </div>
+
+    </form>
+</div>

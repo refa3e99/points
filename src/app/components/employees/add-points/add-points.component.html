@@ -1,0 +1,29 @@
+<div>
+    <form [formGroup]="addPointsForm" (ngSubmit)="addPoints()" class="row g-3">
+
+        <div class="d-md-flex gap-2 py-3">
+            <div class="col">
+                <label for="inputPositivePoints" class="form-label">Positive Points</label>
+                <input type="number" class="form-control" id="inputPositivePoints" formControlName="positivePoints"
+                [ngClass]="{ 'is-invalid': positivePoints?.invalid && (positivePoints?.dirty || positivePoints?.touched || formSubmitted)}">
+            </div>
+
+            <div class="col">
+                <label for="inputNegativePoints" class="form-label">Negative Points</label>
+                <input type="number" class="form-control" id="inputNegativePoints" formControlName="negativePoints"
+                    [ngClass]="{ 'is-invalid': negativePoints?.invalid && (negativePoints?.dirty || negativePoints?.touched || formSubmitted)}">
+            </div>
+
+            <div class="col">
+                <label for="reason" class="form-label">Reason</label>
+                <input type="text" class="form-control" id="inputReason" formControlName="reason"
+                    placeholder="Task Done" [ngClass]="{ 'is-invalid': reason?.invalid && (reason?.dirty || reason?.touched || formSubmitted)}">
+            </div>
+        </div>
+
+        <div class="col-12">
+            <button type="submit" class="btn btn-primary">Add Points</button>
+        </div>
+
+    </form>
+</div>

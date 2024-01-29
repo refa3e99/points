@@ -1,1 +1,37 @@
 /* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+
+/* snack bar classes */
+.success.mat-mdc-snack-bar-container .mdc-snackbar__surface {
+    background-color: rgb(25, 135, 84);
+    color: #fff;
+}
+
+.error.mat-mdc-snack-bar-container .mdc-snackbar__surface {
+    background-color: rgb(220, 53, 69);
+    color: #fff;
+}
+
+.mat-mdc-snack-bar-container .mdc-snackbar__label {
+    color: white;
+}
+
+/* ------------ */
+
+.hide {
+    visibility: hidden;
+}
+
+.show{
+    visibility: visible;
+}

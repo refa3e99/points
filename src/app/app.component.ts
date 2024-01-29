@@ -1,14 +1,23 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { RouterOutlet } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { AuthenticationService } from './services/Auth/authentication.service';
 
 @Component({
   selector: 'app-root',
-  standalone: true,
-  imports: [CommonModule, RouterOutlet],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent {
-  title = 'points';
+export class AppComponent implements OnInit {
+  isLoggedIn: boolean = false;
+  
+  constructor(public authservice: AuthenticationService) { }
+
+  ngOnInit(): void {
+    this.authservice.isLoggedIn$.subscribe(isLoggedIn => {
+      this.isLoggedIn = isLoggedIn;
+    });
+  }
+
+  logout() {
+    this.authservice.logOut();
+  }
 }

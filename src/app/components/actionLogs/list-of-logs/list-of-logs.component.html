@@ -1,0 +1,69 @@
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">Points History</h1>
+</div>
+
+@if (listOfLogs?.length == 0) {
+<div class="text-center my-5">
+    <div>
+        <span>No Data Found</span>
+    </div>
+</div>
+}
+
+@else if (!listOfLogs) {
+<div class="text-center my-5">
+    <div class="spinner-border" role="status">
+        <span class="visually-hidden">Loading...</span>
+    </div>
+</div>
+}
+
+@else {
+<div class="d-flex justify-content-between gap-2">
+    <table class="table table-hover table-sm">
+        <thead>
+            <tr class="table-success">
+                <th class="text-center">Type</th>
+                <th class="text-center">Points</th>
+                <th class="text-center">Reason</th>
+                <th class="text-center">Date</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @for (log of listOfPositives; track $index) {
+            <tr>
+                <td class="text-center">{{log.actionType}}</td>
+                <td class="text-center">{{log.points}}</td>
+                <td class="text-center">{{log.reason}}</td>
+                <td class="text-center">{{log.timestamp | date:'dd/MM/yyyy HH:mm:ss'}}</td>
+            </tr>
+            }
+        </tbody>
+
+    </table>
+
+    <table class="table table-hover table-sm">
+        <thead>
+            <tr class="table-danger">
+                <th class="text-center">Type</th>
+                <th class="text-center">Points</th>
+                <th class="text-center">Reason</th>
+                <th class="text-center">Date</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @for (log of listOfNegatives; track $index) {
+            <tr>
+                <td class="text-center">{{log.actionType}}</td>
+                <td class="text-center">{{log.points}}</td>
+                <td class="text-center">{{log.reason}}</td>
+                <td class="text-center">{{log.timestamp | date}}</td>
+            </tr>
+            }
+        </tbody>
+
+    </table>
+</div>
+}
