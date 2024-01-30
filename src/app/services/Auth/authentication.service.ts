@@ -21,7 +21,7 @@ export class AuthenticationService {
 
   login(email: string, password: string) {
     const credentials = { email, password };
-    return this.http.post(this.url + '/auth/login', credentials, { withCredentials: true }).pipe(
+    return this.http.post(this.url + '/auth/login', credentials).pipe(
       tap((response: any) => {
         this.cookieService.set('AUTH', response.cookie.AUTH);
         this.isLoggedIn.next(true);
@@ -36,8 +36,7 @@ export class AuthenticationService {
   }
 
   isAuthenticated() {
-    const token = this.cookieService.get('AUTH');
-    return this.http.post(this.url + '/auth/isAuthenticated', token);
+    return this.http.get(this.url + '/auth/isAuthenticated');
   }
 
   logOut() {
@@ -47,9 +46,13 @@ export class AuthenticationService {
   }
 
   private checkAuthenticationStatus(): void {
-    this.isAuthenticated().subscribe(
-      () => this.isLoggedIn.next(true),
-      () => this.isLoggedIn.next(false)
-    );
+
+    const token = this.cookieService.get('AUTH');
+    if (token) {
+      this.isAuthenticated().subscribe(
+        () => this.isLoggedIn.next(true),
+        () => this.isLoggedIn.next(false)
+      );
+    }
   }
 }

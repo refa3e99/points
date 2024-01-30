@@ -1,6 +1,6 @@
 // auth-interceptor.ts
 import { Injectable } from '@angular/core';
-import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent } from '@angular/common/http';
+import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
 
@@ -13,7 +13,11 @@ export class AuthInterceptor implements HttpInterceptor {
         const authToken = this.cookieService.get('AUTH');
 
         if (authToken) {
-            const authRequest = request.clone({ withCredentials: true });
+            const headers = new HttpHeaders({
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${authToken}`
+            });
+            const authRequest = request.clone({ headers: headers });
             return next.handle(authRequest);
         }
 
